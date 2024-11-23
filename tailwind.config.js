@@ -1,8 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './index.html', 
+    './src-2-frontend/**/*.{js,ts,jsx,tsx}'
+  ], // Updated to include `src-2-frontend` folder
   theme: {
-    extend: {},
+    extend: {}, // You can customize your theme here if needed
   },
-  plugins: [],
+  plugins: [], // Add Tailwind plugins here if required
 };

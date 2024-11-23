@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src-2-frontend'), // Updated to src-2-frontend
+      '@': path.resolve(__dirname, './src-2-frontend'), // Corrected alias
       '@lib': path.resolve(__dirname, './src-2-frontend/lib') // Explicit alias for lib
     }
   },
@@ -17,7 +17,7 @@ export default defineConfig({
       external: [],
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom', 'zustand']
+          vendor: ['react', 'react-dom', 'react-router-dom', 'zustand'] // Optimize dependencies
         }
       }
     }
@@ -27,7 +27,7 @@ export default defineConfig({
     open: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:8080', // Backend URL
         changeOrigin: true,
         secure: false
       }

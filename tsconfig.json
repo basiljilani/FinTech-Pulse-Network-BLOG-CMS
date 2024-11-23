@@ -16,7 +16,7 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["src-2-frontend/*"], // Corrected path
-      "@/lib/*": ["src-2-frontend/lib/*"]
+      "@lib/*": ["src-2-frontend/lib/*"]
     },
     "allowJs": true,
     "esModuleInterop": true,
