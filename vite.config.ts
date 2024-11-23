@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'), // Match `tsconfig.json`
-      '@/lib': path.resolve(__dirname, './src/lib') // Explicit alias for 'lib'
+      '@': path.resolve(__dirname, './src-2-frontend'), // Updated to src-2-frontend
+      '@lib': path.resolve(__dirname, './src-2-frontend/lib') // Explicit alias for lib
     }
   },
   build: {
@@ -19,6 +19,17 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom', 'zustand']
         }
+      }
+    }
+  },
+  server: {
+    port: 3000,
+    open: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        secure: false
       }
     }
   }

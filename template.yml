@@ -64,9 +64,9 @@ Resources:
   SaveUserDataFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/saveUserData.handler
+      Handler: src-1-backend/handlers/saveUserData.handler
       Runtime: nodejs18.x
-      CodeUri: ./src
+      CodeUri: ./src-1-backend
       Policies:
         - DynamoDBCrudPolicy:
             TableName: user-data
@@ -125,9 +125,9 @@ Resources:
   AddContentFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/addContent.handler
+      Handler: src-1-backend/handlers/addContent.handler
       Runtime: nodejs18.x
-      CodeUri: ./src
+      CodeUri: ./src-1-backend
       Role: !GetAtt AdminRole.Arn
       Policies:
         - DynamoDBCrudPolicy:
@@ -136,17 +136,17 @@ Resources:
   UpdateContentFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/updateContent.handler
+      Handler: src-1-backend/handlers/updateContent.handler
       Runtime: nodejs18.x
-      CodeUri: ./src
+      CodeUri: ./src-1-backend
       Role: !GetAtt AdminRole.Arn
 
   DeleteContentFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/deleteContent.handler
+      Handler: src-1-backend/handlers/deleteContent.handler
       Runtime: nodejs18.x
-      CodeUri: ./src
+      CodeUri: ./src-1-backend
       Role: !GetAtt AdminRole.Arn
 
 Outputs:

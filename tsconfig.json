@@ -13,17 +13,19 @@
     "jsx": "react-jsx",
     "strict": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./", // Explicit root
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"], // Match with `vite.config.ts`
-      "@/lib/*": ["src/lib/*"] // Optional: Add explicit alias for 'lib'
+      "@/*": ["src-2-frontend/*"], // Corrected path
+      "@/lib/*": ["src-2-frontend/lib/*"]
     },
     "allowJs": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+    "typeRoots": ["./node_modules/@types", "./src-2-frontend/types"]
   },
-  "include": ["src"], // Ensure src folder is included
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src-2-frontend"],
+  "references": [
+    { "path": "./tsconfig.node.json" }
+  ]
 }
