@@ -30,6 +30,13 @@ Resources:
           RequireSymbols: true
       AutoVerifiedAttributes:
         - email
+      Schema:
+        - Name: email
+          Required: true
+          Mutable: true
+        - Name: name
+          Required: false
+          Mutable: true
 
   # Cognito App Client
   FintechAppClient:
@@ -38,8 +45,33 @@ Resources:
       ClientName: FintechClient
       UserPoolId: !Ref FintechUserPool
       GenerateSecret: false
+      ExplicitAuthFlows:
+        - ALLOW_USER_PASSWORD_AUTH
+        - ALLOW_REFRESH_TOKEN_AUTH
+        - ALLOW_USER_SRP_AUTH
+      AllowedOAuthFlows:
+        - code
+        - implicit
+      AllowedOAuthScopes:
+        - email
+        - openid
+        - profile
+      CallbackURLs:
+        - https://yourfrontendurl.com/callback
+      LogoutURLs:
+        - https://yourfrontendurl.com/logout
 
-  # Cognito Authorizer
+  # Cognito Identity Pool (optional, if needed for federated identities)
+  FintechIdentityPool:
+    Type: AWS::Cognito::IdentityPool
+    Properties:
+      IdentityPoolName: FintechIdentityPool
+      AllowUnauthenticatedIdentities: false
+      CognitoIdentityProviders:
+        - ClientId: !Ref FintechAppClient
+          ProviderName: !GetAtt FintechUserPool.ProviderName
+
+  # Cognito Authorizer for API Gateway
   FintechCognitoAuthorizer:
     Type: AWS::ApiGateway::Authorizer
     Properties:
@@ -153,3 +185,12 @@ Outputs:
   ApiUrl:
     Description: API Gateway URL
     Value: !Sub "https://${FintechPulseApi}.execute-api.${AWS::Region}.amazonaws.com/dev/"
+  CognitoUserPoolId:
+    Description: Cognito User Pool ID
+    Value: !Ref FintechUserPool
+  CognitoUserPoolClientId:
+    Description: Cognito App Client ID
+    Value: !Ref FintechAppClient
+  CognitoIdentityPoolId:
+    Description: Cognito Identity Pool ID
+    Value: !Ref FintechIdentityPool
