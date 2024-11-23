@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Infrastructure for FinTech Pulse
+Description: Infrastructure for FinTech Pulse Web App
 
 Resources:
   # DynamoDB Table
@@ -121,34 +121,6 @@ Resources:
       UserPoolId: !Ref FintechUserPool
       RoleArn: !GetAtt AdminRole.Arn
 
-  # Admin API Gateway Routes
-  AdminAPI:
-    Type: AWS::Serverless::Api
-    Properties:
-      Name: AdminApi
-      StageName: dev
-      Auth:
-        DefaultAuthorizer: FintechCognitoAuthorizer
-      Events:
-        AddContent:
-          Type: Api
-          Properties:
-            Path: /admin/add-content
-            Method: POST
-            RestApiId: !Ref FintechPulseApi
-        UpdateContent:
-          Type: Api
-          Properties:
-            Path: /admin/update-content
-            Method: PUT
-            RestApiId: !Ref FintechPulseApi
-        DeleteContent:
-          Type: Api
-          Properties:
-            Path: /admin/delete-content
-            Method: DELETE
-            RestApiId: !Ref FintechPulseApi
-
   # Admin Lambda Functions
   AddContentFunction:
     Type: AWS::Serverless::Function
@@ -176,3 +148,8 @@ Resources:
       Runtime: nodejs18.x
       CodeUri: ./src
       Role: !GetAtt AdminRole.Arn
+
+Outputs:
+  ApiUrl:
+    Description: API Gateway URL
+    Value: !Sub "https://${FintechPulseApi}.execute-api.${AWS::Region}.amazonaws.com/dev/"
