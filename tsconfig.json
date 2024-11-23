@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./", // Explicit root
+    "paths": {
+      "@/*": ["src/*"], // Match with `vite.config.ts`
+      "@/lib/*": ["src/lib/*"] // Optional: Add explicit alias for 'lib'
+    },
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"]
+  },
+  "include": ["src"], // Ensure src folder is included
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
