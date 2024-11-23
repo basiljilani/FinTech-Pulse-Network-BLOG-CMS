@@ -7,12 +7,14 @@ frontend:
         - npm install
     build:
       commands:
+        - pwd  # This will help us debug by showing the current directory
+        - ls   # This will list files to confirm where we are
         - npm run build
+        - ls dist  # This will verify the dist folder exists
   artifacts:
-    baseDirectory: src-2-frontend/dist
+    baseDirectory: dist
     files:
       - '**/*'
   cache:
     paths:
       - node_modules/**/*
-      - src-2-frontend/node_modules/**/*
