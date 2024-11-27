@@ -1,37 +1,49 @@
-// Import the AWS SDK
-const AWS = require('aws-sdk');
-const dynamoDB = new AWS.DynamoDB.DocumentClient();
+// saveUserData.mjs
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
+const client = new DynamoDBClient({});
+const ddbDocClient = DynamoDBDocumentClient.from(client);
 
-// Export the handler function
-exports.handler = async (event) => {
+export const handler = async (event) => {
     try {
-        // Parse the incoming event's body (assuming it's JSON formatted)
         const body = JSON.parse(event.body);
         const { email, name } = body;
+        
+        // Get user ID from Cognito authorizer if available
+        const userId = event.requestContext.authorizer?.claims?.sub || email;
 
-        // Define the parameters to save data into the DynamoDB table
         const params = {
-            TableName: process.env.TABLE_NAME, // Environment variable for table name
+            TableName: process.env.TABLE_NAME,
             Item: {
-                email: email, // Partition key
-                name: name,   // Additional data
-            },
+                UserID: userId,
+                email: email,
+                name: name,
+                createdAt: new Date().toISOString()
+            }
         };
 
-        // Save the item into DynamoDB
-        await dynamoDB.put(params).promise();
+        await ddbDocClient.send(new PutCommand(params));
 
-        // Return a success response
         return {
             statusCode: 200,
-            body: JSON.stringify({ message: "User data saved successfully!" }),
+            headers: {
+                'Access-Control-Allow-Origin': 'https://fintechpulse.net',
+                'Access-Control-Allow-Credentials': true
+            },
+            body: JSON.stringify({
+                message: "User data saved successfully!",
+                userId: userId
+            })
         };
     } catch (error) {
-        // Log the error and return an internal server error response
         console.error("Error saving user data:", error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ message: "Internal server error" }),
+            headers: {
+                'Access-Control-Allow-Origin': 'https://fintechpulse.net',
+                'Access-Control-Allow-Credentials': true
+            },
+            body: JSON.stringify({ message: "Internal server error" })
         };
     }
 };
