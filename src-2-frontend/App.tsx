@@ -1,87 +1,84 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Authenticator } from '@aws-amplify/ui-react';
+import { Authenticator, ThemeProvider, Image } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import Solutions from './pages/Solutions';
-import Categories from './pages/Categories';
-import Pricing from './pages/Pricing';
-import Contact from './pages/Contact';
-import Dashboard from './pages/Dashboard';
-import Profile from './pages/Profile';
-import Settings from './pages/Settings';
-import AuthGuard from './components/AuthGuard';
-import FinancialNews from './pages/FinancialNews';
-import TradingUpdates from './pages/TradingUpdates';
-import PremiumFeature from './components/PremiumFeature';
+
+const theme = {
+  name: 'fintech-theme',
+  tokens: {
+    colors: {
+      brand: {
+        primary: {
+          10: '#1e40af', // Darker blue
+          80: '#3b82f6', // Light blue
+          100: '#1d4ed8' // Medium blue
+        }
+      },
+      background: {
+        primary: '#ffffff',
+        secondary: '#f8fafc'
+      }
+    },
+    components: {
+      authenticator: {
+        router: {
+          borderWidth: '0'
+        },
+        container: {
+          boxShadow: 'none'
+        }
+      },
+      button: {
+        primary: {
+          backgroundColor: '#3b82f6',
+          _hover: {
+            backgroundColor: '#1d4ed8'
+          }
+        }
+      },
+      fieldcontrol: {
+        _focus: {
+          borderColor: '#3b82f6'
+        }
+      }
+    }
+  }
+};
+
+const components = {
+  Header() {
+    return (
+      <div className="flex flex-col items-center py-8">
+        <Image
+          src="/logo.png"
+          alt="FinTech Pulse"
+          className="h-12 w-auto"
+        />
+        <h1 className="text-2xl font-bold text-blue-600 mt-4">FinTech Pulse</h1>
+        <p className="text-gray-600">Welcome to the future of financial insights</p>
+      </div>
+    );
+  },
+  Footer() {
+    return (
+      <div className="flex justify-center py-4 text-sm text-gray-500">
+        <p>© 2024 FinTech Pulse. All rights reserved.</p>
+      </div>
+    );
+  }
+};
 
 function App() {
   return (
-    <Authenticator>
-      {({ signOut, user }) => (
-        <BrowserRouter>
-          <div className="min-h-screen bg-gray-50">
-            <Navbar signOut={signOut} user={user} />
-            <Routes>
-              {/* Public Routes */}
-              <Route path="/" element={<Home />} />
-              <Route path="/solutions" element={<Solutions />} />
-              <Route path="/categories" element={<Categories />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/contact" element={<Contact />} />
-              
-              {/* Protected Routes */}
-              <Route path="/dashboard" element={
-                <AuthGuard>
-                  <Dashboard />
-                </AuthGuard>
-              } />
-              <Route path="/profile" element={
-                <AuthGuard>
-                  <Profile />
-                </AuthGuard>
-              } />
-              <Route path="/settings" element={
-                <AuthGuard>
-                  <Settings />
-                </AuthGuard>
-              } />
-              <Route path="/financial-news" element={
-                <AuthGuard>
-                  <FinancialNews />
-                </AuthGuard>
-              } />
-              <Route path="/trading-updates" element={
-                <AuthGuard>
-                  <TradingUpdates />
-                </AuthGuard>
-              } />
-              <Route path="/market-analysis" element={
-                <AuthGuard>
-                  <PremiumFeature />
-                </AuthGuard>
-              } />
-              <Route path="/investment-reports" element={
-                <AuthGuard>
-                  <PremiumFeature />
-                </AuthGuard>
-              } />
-              <Route path="/research-papers" element={
-                <AuthGuard>
-                  <PremiumFeature />
-                </AuthGuard>
-              } />
-              <Route path="/regulatory-content" element={
-                <AuthGuard>
-                  <PremiumFeature />
-                </AuthGuard>
-              } />
-            </Routes>
-          </div>
-        </BrowserRouter>
-      )}
-    </Authenticator>
+    <ThemeProvider theme={theme}>
+      <Authenticator components={components}>
+        {({ signOut, user }) => (
+          <BrowserRouter>
+            {/* Your existing routes */}
+          </BrowserRouter>
+        )}
+      </Authenticator>
+    </ThemeProvider>
   );
 }
 
