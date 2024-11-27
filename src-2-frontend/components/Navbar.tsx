@@ -1,13 +1,24 @@
 import React, { useState } from 'react';
 import { Menu, X, Activity, UserCircle, Settings, LogOut } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuthStore } from '../lib/auth.store';
 
-export default function Navbar() {
+
+interface NavbarProps {
+  signOut?: () => void;
+  user?: {
+    username?: string;
+    attributes?: {
+      email?: string;
+      sub?: string;
+    };
+  };
+}
+
+const Navbar: React.FC<NavbarProps> = ({ signOut, user }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const navigate = useNavigate();
-  const { isAuthenticated, user, signOut } = useAuthStore();
+  const isAuthenticated = !!user;
 
   const menuItems = [
     { title: 'Solutions', href: '/solutions' },
@@ -18,7 +29,9 @@ export default function Navbar() {
 
   const handleSignOut = async () => {
     try {
-      await signOut();
+      if (signOut) {
+        signOut();
+      }
       setShowProfileMenu(false);
       navigate('/');
     } catch (error) {
@@ -174,4 +187,6 @@ export default function Navbar() {
       )}
     </nav>
   );
-}
+};
+
+export default Navbar;

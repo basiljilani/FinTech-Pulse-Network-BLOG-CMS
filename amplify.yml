@@ -7,10 +7,10 @@ frontend:
         - npm install
     build:
       commands:
-        - pwd  # This will help us debug by showing the current directory
-        - ls   # This will list files to confirm where we are
+        - pwd
+        - ls
         - npm run build
-        - ls dist  # This will verify the dist folder exists
+        - ls dist
   artifacts:
     baseDirectory: dist
     files:
@@ -18,3 +18,5 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
+    environment:
+      AMPLIFY_ROLE: arn:aws:iam::904233095585:role/Amplify-Admin
