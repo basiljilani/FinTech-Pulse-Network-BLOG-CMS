@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import Navbar from './components/Navbar';
@@ -16,76 +16,89 @@ import FinancialNews from './pages/FinancialNews';
 import TradingUpdates from './pages/TradingUpdates';
 import PremiumFeature from './components/PremiumFeature';
 
-const AuthenticatedFeature = ({ children }: { children: React.ReactNode }) => (
+const AuthComponent = ({ children }: { children: React.ReactNode }) => (
  <Authenticator>
    {({ signOut, user }) => (
-     <AuthGuard>
-       {React.cloneElement(children as React.ReactElement, { signOut, user })}
-     </AuthGuard>
+     <div>
+       <Navbar signOut={signOut} user={user} />
+       {children}
+     </div>
    )}
  </Authenticator>
 );
+
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+ const navigate = useNavigate();
+
+ return (
+   <AuthComponent>
+     {children}
+   </AuthComponent>
+ );
+};
 
 function App() {
  return (
    <BrowserRouter>
      <div className="min-h-screen bg-gray-50">
-       <Navbar />
        <Routes>
          {/* Public Routes */}
-         <Route path="/" element={<Home />} />
-         <Route path="/solutions" element={<Solutions />} />
-         <Route path="/categories" element={<Categories />} />
-         <Route path="/pricing" element={<Pricing />} />
-         <Route path="/contact" element={<Contact />} />
+         <Route path="/" element={<><Navbar /><Home /></>} />
+         <Route path="/solutions" element={<><Navbar /><Solutions /></>} />
+         <Route path="/categories" element={<><Navbar /><Categories /></>} />
+         <Route path="/pricing" element={<><Navbar /><Pricing /></>} />
+         <Route path="/contact" element={<><Navbar /><Contact /></>} />
+         <Route path="/login" element={<AuthComponent><Home /></AuthComponent>} />
          
          {/* Protected Premium Routes */}
          <Route path="/market-analysis" element={
-           <AuthenticatedFeature>
+           <ProtectedRoute>
              <PremiumFeature />
-           </AuthenticatedFeature>
+           </ProtectedRoute>
          } />
          <Route path="/investment-reports" element={
-           <AuthenticatedFeature>
+           <ProtectedRoute>
              <PremiumFeature />
-           </AuthenticatedFeature>
+           </ProtectedRoute>
          } />
          <Route path="/research-papers" element={
-           <AuthenticatedFeature>
+           <ProtectedRoute>
              <PremiumFeature />
-           </AuthenticatedFeature>
+           </ProtectedRoute>
          } />
          <Route path="/regulatory-content" element={
-           <AuthenticatedFeature>
+           <ProtectedRoute>
              <PremiumFeature />
-           </AuthenticatedFeature>
-         } />
-         <Route path="/financial-news" element={
-           <AuthenticatedFeature>
-             <FinancialNews />
-           </AuthenticatedFeature>
-         } />
-         <Route path="/trading-updates" element={
-           <AuthenticatedFeature>
-             <TradingUpdates />
-           </AuthenticatedFeature>
+           </ProtectedRoute>
          } />
          
-         {/* User Dashboard Routes */}
+         {/* Protected Feature Routes */}
+         <Route path="/financial-news" element={
+           <ProtectedRoute>
+             <FinancialNews />
+           </ProtectedRoute>
+         } />
+         <Route path="/trading-updates" element={
+           <ProtectedRoute>
+             <TradingUpdates />
+           </ProtectedRoute>
+         } />
+         
+         {/* Protected User Routes */}
          <Route path="/dashboard" element={
-           <AuthenticatedFeature>
+           <ProtectedRoute>
              <Dashboard />
-           </AuthenticatedFeature>
+           </ProtectedRoute>
          } />
          <Route path="/profile" element={
-           <AuthenticatedFeature>
+           <ProtectedRoute>
              <Profile />
-           </AuthenticatedFeature>
+           </ProtectedRoute>
          } />
          <Route path="/settings" element={
-           <AuthenticatedFeature>
+           <ProtectedRoute>
              <Settings />
-           </AuthenticatedFeature>
+           </ProtectedRoute>
          } />
        </Routes>
      </div>

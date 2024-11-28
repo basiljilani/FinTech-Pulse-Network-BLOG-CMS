@@ -18,5 +18,3 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
-    environment:
-      AMPLIFY_ROLE: arn:aws:iam::904233095585:role/Amplify-Admin

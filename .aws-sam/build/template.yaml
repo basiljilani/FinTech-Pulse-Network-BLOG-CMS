@@ -164,6 +164,55 @@ Resources:
         Fn::GetAtt:
         - AdminRole
         - Arn
+  AmplifyServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: AmplifyServiceRole-FintechPulse
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: amplify.amazonaws.com
+          Action: sts:AssumeRole
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/AdministratorAccess-Amplify
+      Policies:
+      - PolicyName: AmplifyDeploymentPolicy
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - cognito-idp:*
+            - cognito-identity:*
+            - apigateway:*
+            - execute-api:*
+            Resource: '*'
+  IdentityPoolRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Federated: cognito-identity.amazonaws.com
+          Action: sts:AssumeRoleWithWebIdentity
+          Condition:
+            StringEquals:
+              cognito-identity.amazonaws.com:aud:
+                Ref: FintechIdentityPool
+      Policies:
+      - PolicyName: CognitoAuthorizedPolicy
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - execute-api:Invoke
+            Resource:
+              Fn::Sub: arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${FintechPulseApi}/*
   AddContentFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -259,3 +308,9 @@ Outputs:
     Description: Cognito Identity Pool ID
     Value:
       Ref: FintechIdentityPool
+  AmplifyServiceRoleArn:
+    Description: Amplify Service Role ARN
+    Value:
+      Fn::GetAtt:
+      - AmplifyServiceRole
+      - Arn
