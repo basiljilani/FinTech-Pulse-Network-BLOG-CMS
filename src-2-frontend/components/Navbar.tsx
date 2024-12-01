@@ -1,189 +1,112 @@
-import React, { useState } from 'react';
-import { Menu, X, Activity, UserCircle, Settings, LogOut } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Menu, X, Activity, UserCircle, Settings, Zap, BookOpen, Lightbulb, Cpu, Target } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
-
-interface NavbarProps {
-  signOut?: () => void;
-  user?: {
-    username?: string;
-    attributes?: {
-      email?: string;
-      sub?: string;
-    };
-  };
-}
-
-const Navbar: React.FC<NavbarProps> = ({ signOut, user }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Navbar: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
-  const isAuthenticated = !!user;
 
-  const menuItems = [
-    { title: 'Solutions', href: '/solutions' },
-    { title: 'Categories', href: '/categories' },
-    { title: 'Pricing', href: '/pricing' },
-    { title: 'Contact', href: '/contact' },
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const handleSignOut = async () => {
-    try {
-      if (signOut) {
-        signOut();
-      }
-      setShowProfileMenu(false);
-      navigate('/');
-    } catch (error) {
-      console.error('Error signing out:', error);
-    }
+  const handleProfileClick = () => {
+    setShowProfileMenu(!showProfileMenu);
   };
 
   return (
-    <nav className="bg-white shadow-lg fixed w-full z-50">
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          <Link to="/" className="flex items-center hover:opacity-75 transition-opacity">
-            <Activity className="h-8 w-8 text-blue-600 animate-pulse" />
-            <span className="ml-2 text-xl font-bold text-gray-900">FinTech Pulse</span>
-          </Link>
-          
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            {menuItems.map((item) => (
-              <Link
-                key={item.title}
-                to={item.href}
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-              >
-                {item.title}
-              </Link>
-            ))}
-            {isAuthenticated ? (
-              <div className="relative ml-4">
-                <button
-                  onClick={() => setShowProfileMenu(!showProfileMenu)}
-                  className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 bg-gray-100 px-4 py-2 rounded-lg"
+          <div className="flex">
+            <div className="flex-shrink-0 flex items-center">
+              <Link to="/" className="text-2xl font-bold text-blue-600 flex items-center">
+                <motion.div
+                  animate={{
+                    scale: [1, 1.1, 1],
+                    opacity: [1, 0.5, 1]
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
                 >
-                  <UserCircle className="h-5 w-5" />
-                  <span className="text-sm font-medium">{user?.username}</span>
-                </button>
-                
-                {showProfileMenu && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 border border-gray-100">
-                    <Link
-                      to="/dashboard"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                      onClick={() => setShowProfileMenu(false)}
-                    >
-                      <Activity className="h-4 w-4 mr-2" />
-                      Dashboard
-                    </Link>
-                    <Link
-                      to="/profile"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                      onClick={() => setShowProfileMenu(false)}
-                    >
-                      <UserCircle className="h-4 w-4 mr-2" />
-                      Profile
-                    </Link>
-                    <Link
-                      to="/settings"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                      onClick={() => setShowProfileMenu(false)}
-                    >
-                      <Settings className="h-4 w-4 mr-2" />
-                      Settings
-                    </Link>
-                    <button
-                      onClick={handleSignOut}
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                    >
-                      <LogOut className="h-4 w-4 mr-2" />
-                      Sign Out
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <button
-                onClick={() => navigate('/login')}
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-              >
-                Sign In
-              </button>
-            )}
+                  <Activity className="h-8 w-8 mr-2" />
+                </motion.div>
+                FinTech Pulse Network
+              </Link>
+            </div>
           </div>
 
-          {/* Mobile Menu Button */}
+          <div className="hidden md:flex md:items-center md:space-x-6">
+            <Link to="/ai-companion" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+              <Cpu className="h-4 w-4 mr-1" />
+              AI Companion
+            </Link>
+            <Link to="/insights" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+              <Lightbulb className="h-4 w-4 mr-1" />
+              Insights
+            </Link>
+            <Link to="/solutions" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+              <Target className="h-4 w-4 mr-1" />
+              Solutions
+            </Link>
+            <div className="relative">
+              <button
+                onClick={handleProfileClick}
+                className="flex items-center text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+              >
+                <UserCircle className="h-6 w-6" />
+              </button>
+              {showProfileMenu && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+                >
+                  <div className="py-1">
+                    <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</Link>
+                    <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</Link>
+                  </div>
+                </motion.div>
+              )}
+            </div>
+          </div>
+
           <div className="md:hidden flex items-center">
             <button
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 focus:outline-none"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden">
+      {/* Mobile menu */}
+      {isMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="md:hidden bg-white"
+        >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {menuItems.map((item) => (
-              <Link
-                key={item.title}
-                to={item.href}
-                className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.title}
-              </Link>
-            ))}
-            {isAuthenticated ? (
-              <>
-                <Link
-                  to="/dashboard"
-                  className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  to="/profile"
-                  className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Profile
-                </Link>
-                <Link
-                  to="/settings"
-                  className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Settings
-                </Link>
-                <button
-                  onClick={handleSignOut}
-                  className="w-full text-left text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Sign Out
-                </button>
-              </>
-            ) : (
-              <button
-                onClick={() => {
-                  navigate('/login');
-                  setIsOpen(false);
-                }}
-                className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors mt-2"
-              >
-                Sign In
-              </button>
-            )}
+            <Link to="/ai-companion" className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">AI Companion</Link>
+            <Link to="/insights" className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Insights</Link>
+            <Link to="/solutions" className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Solutions</Link>
+            <Link to="/profile" className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Profile</Link>
+            <Link to="/settings" className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Settings</Link>
           </div>
-        </div>
+        </motion.div>
       )}
     </nav>
   );

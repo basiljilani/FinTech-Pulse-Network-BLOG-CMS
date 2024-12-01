@@ -11,26 +11,17 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: path.resolve(__dirname, 'src-2-frontend/dist'), // Use absolute path
+    outDir: 'dist',
     sourcemap: true,
-    rollupOptions: {
-      external: [],
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom', 'zustand'],
-        },
-      },
-    },
   },
   server: {
     port: 3000,
+    strictPort: true,
+    host: true,
     open: true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-        secure: false,
-      },
-    },
+  },
+  base: '/',
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom', '@aws-amplify/ui-react'],
   },
 });
