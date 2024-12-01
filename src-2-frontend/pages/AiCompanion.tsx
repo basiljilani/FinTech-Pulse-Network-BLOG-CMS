@@ -170,8 +170,8 @@ const AiCompanion: React.FC = () => {
       >
         <div className="flex items-center justify-center mb-8">
           <Cpu className="h-12 w-12 text-blue-600 mr-4" />
-          <h1 className="text-5xl font-bold text-gray-900">
-            FinTech Pulse AI Companion
+          <h1 className="text-5xl font-extrabold text-gray-900 mb-4">
+            Pulse AI: <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">Your Ultimate Learning Companion</span>
           </h1>
         </div>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto text-center">

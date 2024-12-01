@@ -85,14 +85,15 @@ const Solutions: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-16">
       <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="text-center mb-16 pt-16"
         >
           <h1 className="text-5xl font-extrabold text-gray-900 mb-6">
-            FinTech Pulse: 
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-transparent bg-clip-text"> Transforming Financial Knowledge</span>
+            Transforming <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">Financial Knowledge</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Redefining how professionals, students, and enthusiasts engage with financial technology through AI-powered, interactive learning and insights.

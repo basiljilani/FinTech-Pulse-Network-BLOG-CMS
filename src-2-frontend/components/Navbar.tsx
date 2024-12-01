@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex md:items-center md:space-x-6">
             <Link to="/ai-companion" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center">
               <Cpu className="h-4 w-4 mr-1" />
-              AI Companion
+              Pulse AI
             </Link>
             <Link to="/insights" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center">
               <Lightbulb className="h-4 w-4 mr-1" />
@@ -100,7 +100,7 @@ const Navbar: React.FC = () => {
           className="md:hidden bg-white"
         >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link to="/ai-companion" className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">AI Companion</Link>
+            <Link to="/ai-companion" className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Pulse AI</Link>
             <Link to="/insights" className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Insights</Link>
             <Link to="/solutions" className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Solutions</Link>
             <Link to="/profile" className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Profile</Link>

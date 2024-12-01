@@ -169,51 +169,37 @@ const Insights: React.FC = () => {
       </section>
 
       {/* Subscribe Section */}
-      <section className="bg-gradient-to-br from-blue-100 to-blue-200 py-12 px-6">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden"
-        >
-          <div className="md:flex items-center">
-            <div className="md:w-2/3 p-6">
-              <div className="bg-yellow-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                <Lightbulb className="h-6 w-6 text-yellow-600" />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-3">
-                Stay Ahead of the Curve
-              </h2>
-              <p className="text-gray-600 mb-4">
-                Subscribe to our newsletter and get the latest financial insights delivered directly to your inbox.
-              </p>
-              <form onSubmit={handleSubscribe} className="flex">
-                <input 
-                  type="email" 
-                  placeholder="Enter your email" 
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="flex-grow px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <button 
-                  type="submit" 
-                  className="bg-blue-600 text-white px-4 py-2 rounded-r-lg hover:bg-blue-700 transition-colors"
-                >
-                  Subscribe
-                </button>
-              </form>
-            </div>
-            <div className="md:w-1/3 hidden md:block">
-              <img 
-                src="https://images.unsplash.com/photo-1579532537598-459ecdaf39cc" 
-                alt="Financial Insights" 
-                className="w-full h-full object-cover"
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.2 }}
+        className="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8 mt-12 rounded-lg shadow-lg"
+      >
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Stay Ahead with Our Newsletter</h2>
+          <p className="text-xl text-gray-600 mb-8">Get the latest financial insights, AI-powered analysis, and exclusive content delivered straight to your inbox.</p>
+          <div className="max-w-md mx-auto">
+            <div className="flex space-x-4">
+              <input 
+                type="email" 
+                placeholder="Enter your email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="flex-1 px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
               />
+              <button 
+                type="button" 
+                onClick={handleSubscribe}
+                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-md hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+              >
+                Subscribe
+              </button>
             </div>
           </div>
-        </motion.div>
-      </section>
+        </div>
+      </motion.div>
 
       <Footer />
     </div>
