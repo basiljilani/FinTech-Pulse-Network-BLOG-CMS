@@ -10,8 +10,23 @@ import {
   Layers, 
   TrendingUp 
 } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
 
-const SolutionCard = ({ icon: Icon, title, description, color }) => (
+interface SolutionCardProps {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  color: string;
+}
+
+interface ValueProposition {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  details: string[];
+}
+
+const SolutionCard: React.FC<SolutionCardProps> = ({ icon: Icon, title, description, color }) => (
   <motion.div 
     initial={{ opacity: 0, y: 50 }}
     animate={{ opacity: 1, y: 0 }}
@@ -48,7 +63,7 @@ const Solutions: React.FC = () => {
     }
   ];
 
-  const valuePropositions = [
+  const valuePropositions: ValueProposition[] = [
     {
       icon: Globe,
       title: "Market Opportunity",
