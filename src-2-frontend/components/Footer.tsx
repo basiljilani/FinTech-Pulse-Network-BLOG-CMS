@@ -3,8 +3,21 @@ import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin, Activity }
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer className="bg-gray-900 text-gray-300 relative">
+      {/* Grid Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0" 
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(75, 85, 99, 0.1) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(75, 85, 99, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '4rem 4rem',
+          }}
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-4">
