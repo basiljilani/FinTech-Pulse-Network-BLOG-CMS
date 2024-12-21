@@ -33,18 +33,18 @@ export default function Footer() {
           
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">Contact Info</h3>
-            <ul className="space-y-2">
-              <li className="flex items-center">
-                <Mail className="h-5 w-5 mr-2 text-blue-500" />
-                <span>info@basilconsulting.net</span>
+            <ul className="space-y-3">
+              <li className="flex items-center group cursor-pointer transition-all duration-300 hover:translate-x-2">
+                <Mail className="h-5 w-5 mr-2 text-blue-500 group-hover:text-blue-400 transition-colors duration-300" />
+                <span className="group-hover:text-blue-400 transition-colors duration-300">info@basilconsulting.net</span>
               </li>
-              <li className="flex items-center">
-                <Phone className="h-5 w-5 mr-2 text-blue-500" />
-                <span>+92 51 89 55 777</span>
+              <li className="flex items-center group cursor-pointer transition-all duration-300 hover:translate-x-2">
+                <Phone className="h-5 w-5 mr-2 text-blue-500 group-hover:text-blue-400 transition-colors duration-300" />
+                <span className="group-hover:text-blue-400 transition-colors duration-300">+92 51 89 55 777</span>
               </li>
-              <li className="flex items-center">
-                <MapPin className="h-6 w-6 mr-2 text-blue-500" />
-                <span>Evacuee Trust Complex, Agha Khan Rd, F-5/1, Islamabad, Pakistan</span>
+              <li className="flex items-center group cursor-pointer transition-all duration-300 hover:translate-x-2">
+                <MapPin className="h-6 w-6 mr-2 text-blue-500 group-hover:text-blue-400 transition-colors duration-300" />
+                <span className="group-hover:text-blue-400 transition-colors duration-300">Evacuee Trust Complex, Agha Khan Rd, F-5/1, Islamabad, Pakistan</span>
               </li>
             </ul>
           </div>
