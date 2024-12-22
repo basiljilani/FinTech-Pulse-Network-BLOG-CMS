@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Footer from '../components/Footer';
+import EarthBackground from '../components/EarthBackground';
 import { 
   Zap, 
   BookOpen, 
@@ -18,7 +19,6 @@ import {
   BarChart2,
   Activity
 } from 'lucide-react';
-import NeuralBackground from '../components/NeuralBackground';
 
 const Home: React.FC = () => {
   const valuePropositions = [
@@ -34,8 +34,8 @@ const Home: React.FC = () => {
     },
     {
       icon: Zap,
-      title: "AI-Powered",
-      description: "Advanced AI algorithms for predictive analytics."
+      title: "Advanced Analytics",
+      description: "Advanced analytics for predictive insights."
     }
   ];
 
@@ -54,14 +54,14 @@ const Home: React.FC = () => {
     },
     {
       id: 2,
-      title: "AI in Investment: Making Smarter Financial Decisions",
-      excerpt: "How artificial intelligence is transforming investment strategies and decision-making processes.",
-      category: "AI & Finance",
+      title: "Advanced Financial Analytics: Making Smarter Decisions",
+      excerpt: "How advanced analytics is transforming financial decision-making processes.",
+      category: "Financial Analytics",
       readTime: "6 min read",
       image: "https://images.unsplash.com/photo-1639322537504-6427a16b0a28?q=80&w=1000&auto=format&fit=crop",
       author: {
         name: "Michael Ross",
-        role: "Tech Strategist"
+        role: "Financial Strategist"
       }
     },
     {
@@ -146,8 +146,8 @@ const Home: React.FC = () => {
     },
     {
       id: 9,
-      title: "The Impact of AI on Risk Management",
-      excerpt: "How artificial intelligence is transforming risk assessment in financial institutions.",
+      title: "The Impact of Advanced Analytics on Risk Management",
+      excerpt: "How advanced analytics is transforming risk assessment in financial institutions.",
       category: "Risk Management",
       readTime: "8 min read",
       date: "Dec 15, 2023",
@@ -160,52 +160,71 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-black">
       {/* Hero Section */}
-      <div className="relative min-h-screen flex flex-col">
-        <div className="absolute inset-0">
-          <NeuralBackground />
-        </div>
-        
+      <div className="relative h-screen flex flex-col">
+        <EarthBackground />
         <div className="relative z-10 flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
           <div className="w-full max-w-7xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
               className="text-center"
             >
-              <motion.h1 
-                className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 mb-6 sm:mb-8 leading-tight tracking-tight"
-                initial={{ opacity: 0, y: 20 }}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
+                className="max-w-3xl mx-auto space-y-4"
               >
-                Elevate Your{" "}
-                <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-transparent bg-clip-text">
-                  Financial Intelligence
-                </span>
-              </motion.h1>
-              <motion.p 
-                className="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-8 sm:mb-12 max-w-3xl mx-auto"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
-                Harness the power of AI-driven insights, curated knowledge, and strategic analysis to transform your financial decision-making.
-              </motion.p>
+                <h2 className="text-lg sm:text-xl font-medium text-indigo-200 tracking-wide uppercase mb-4">
+                  Advanced Financial Analytics
+                </h2>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight leading-[1.15] mb-8">
+                  Transform Your
+                  <span className="block mt-1 bg-gradient-to-r from-indigo-200 via-sky-200 to-indigo-300 bg-clip-text text-transparent">
+                    Financial Future
+                  </span>
+                </h1>
+                <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed font-light">
+                  Experience the next generation of financial intelligence. 
+                  Make smarter, data-driven decisions with powerful analytics.
+                </p>
+              </motion.div>
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center"
+                className="mt-12 flex flex-col sm:flex-row items-center gap-6 justify-center"
               >
-                <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">
+                <button className="px-8 py-3 bg-white text-gray-900 rounded-lg text-lg font-medium hover:bg-gray-100 transition-colors">
                   Get Started
                 </button>
-                <button className="px-8 py-3 bg-white text-gray-900 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 border border-gray-200">
+                <button className="px-8 py-3 bg-gray-900 text-white border border-gray-700 rounded-lg text-lg font-medium hover:bg-gray-800 transition-colors">
                   Learn More
                 </button>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="mt-16 flex items-center justify-center gap-8 text-gray-400"
+              >
+                <div className="flex items-center gap-2">
+                  <Check className="h-5 w-5 text-indigo-400" />
+                  <span>Real-time Insights</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="h-5 w-5 text-indigo-400" />
+                  <span>Advanced Analytics</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="h-5 w-5 text-indigo-400" />
+                  <span>Secure Platform</span>
+                </div>
               </motion.div>
             </motion.div>
           </div>
@@ -213,7 +232,7 @@ const Home: React.FC = () => {
       </div>
 
       {/* Market Ticker */}
-      <div className="w-full bg-gradient-to-r from-gray-900 to-gray-800 text-white py-4">
+      <div className="w-full bg-gray-800 text-white py-4">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0 }}
@@ -267,322 +286,124 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      {/* Designed for Your Success */}
-      <section className="py-24 bg-gray-50">
+      {/* Value Propositions */}
+      <div className="py-20 bg-gray-900">
         <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Designed for Your Success
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Empowering your financial journey with cutting-edge tools and expert insights
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {valuePropositions.map((prop, index) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
+                key={prop.title}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: index * 0.2,
-                  duration: 0.5,
-                  ease: "easeOut"
-                }}
-                whileHover={{ 
-                  y: -8,
-                  transition: { duration: 0.2 }
-                }}
-                className="relative group"
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                className="p-6 rounded-xl bg-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
-                <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-purple-50/50 rounded-2xl transform transition-transform group-hover:scale-105 opacity-0 group-hover:opacity-100" />
-                <div className="relative bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
-                  <div className="bg-gradient-to-br from-blue-50 to-purple-50/50 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <prop.icon className="h-8 w-8 text-blue-600" />
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center mb-4">
+                  {React.createElement(prop.icon, { className: "w-6 h-6 text-white" })}
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">{prop.title}</h3>
+                <p className="text-gray-300">{prop.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Featured Articles */}
+      <div className="py-20 bg-gray-800">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold text-white mb-12">Featured Articles</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {featuredArticles.map((article, index) => (
+              <motion.div
+                key={article.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                className="group relative overflow-hidden rounded-xl bg-gray-900 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="aspect-w-16 aspect-h-9 relative overflow-hidden">
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/60 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-8">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <span className="px-3 py-1 bg-gray-800/90 backdrop-blur-sm text-sm font-medium rounded-full text-gray-200">
+                        {article.category}
+                      </span>
+                      <span className="text-sm text-gray-300 flex items-center">
+                        <Clock className="w-4 h-4 mr-1" />
+                        {article.readTime}
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors duration-300">
+                      {article.title}
+                    </h3>
+                    <p className="text-gray-300 text-sm line-clamp-2">
+                      {article.excerpt}
+                    </p>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">{prop.title}</h3>
-                  <p className="text-gray-600 mb-6 leading-relaxed">
-                    {prop.description}
-                  </p>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Statistics Section */}
-      <section className="py-16 bg-white">
+      {/* Additional Articles */}
+      <div className="py-20 bg-gray-900">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Total Trading Volume */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="bg-white rounded-2xl p-8 shadow-[0_2px_40px_-12px_rgba(0,0,0,0.1)] hover:shadow-[0_2px_40px_-8px_rgba(0,0,0,0.15)] transition-all"
-            >
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-gray-600 font-medium mb-2">Total Trading Volume</h3>
-                  <p className="text-4xl font-bold text-gray-900">$2.4M</p>
-                  <div className="flex items-center mt-4">
-                    <span className="text-green-500 font-medium">+12.5%</span>
-                    <span className="text-gray-500 ml-2">vs last month</span>
-                  </div>
-                </div>
-                <div className="bg-blue-50/50 p-4 rounded-xl">
-                  <DollarSign className="h-6 w-6 text-blue-600" />
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Active Users */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-white rounded-2xl p-8 shadow-[0_2px_40px_-12px_rgba(0,0,0,0.1)] hover:shadow-[0_2px_40px_-8px_rgba(0,0,0,0.15)] transition-all"
-            >
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-gray-600 font-medium mb-2">Active Users</h3>
-                  <p className="text-4xl font-bold text-gray-900">12.5K</p>
-                  <div className="flex items-center mt-4">
-                    <span className="text-green-500 font-medium">+8.2%</span>
-                    <span className="text-gray-500 ml-2">vs last month</span>
-                  </div>
-                </div>
-                <div className="bg-blue-50/50 p-4 rounded-xl">
-                  <Users className="h-6 w-6 text-blue-600" />
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Market Analysis */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white rounded-2xl p-8 shadow-[0_2px_40px_-12px_rgba(0,0,0,0.1)] hover:shadow-[0_2px_40px_-8px_rgba(0,0,0,0.15)] transition-all"
-            >
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-gray-600 font-medium mb-2">Market Analysis</h3>
-                  <p className="text-4xl font-bold text-gray-900">845</p>
-                  <div className="flex items-center mt-4">
-                    <span className="text-green-500 font-medium">+15.3%</span>
-                    <span className="text-gray-500 ml-2">vs last month</span>
-                  </div>
-                </div>
-                <div className="bg-blue-50/50 p-4 rounded-xl">
-                  <BarChart2 className="h-6 w-6 text-blue-600" />
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Success Rate */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="bg-white rounded-2xl p-8 shadow-[0_2px_40px_-12px_rgba(0,0,0,0.1)] hover:shadow-[0_2px_40px_-8px_rgba(0,0,0,0.15)] transition-all"
-            >
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-gray-600 font-medium mb-2">Success Rate</h3>
-                  <p className="text-4xl font-bold text-gray-900">94.2%</p>
-                  <div className="flex items-center mt-4">
-                    <span className="text-green-500 font-medium">+5.7%</span>
-                    <span className="text-gray-500 ml-2">vs last month</span>
-                  </div>
-                </div>
-                <div className="bg-blue-50/50 p-4 rounded-xl">
-                  <Activity className="h-6 w-6 text-blue-600" />
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Insights Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="container mx-auto px-6 relative">
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Featured Insights
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
-              Discover the latest trends and insights in finance and technology
-            </p>
-          </motion.div>
-
-          {/* Featured Articles Grid */}
-          <div className="grid lg:grid-cols-12 gap-6 mb-16">
-            {/* Main Featured Article */}
-            <motion.article
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="lg:col-span-8 group"
-            >
-              <div className="relative h-[600px] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all">
-                <img
-                  src={featuredArticles[0].image}
-                  alt={featuredArticles[0].title}
-                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <div className="flex items-center space-x-4 mb-4">
-                    <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-sm font-medium rounded-full text-gray-900">
-                      {featuredArticles[0].category}
-                    </span>
-                    <span className="text-white/90 flex items-center text-sm">
-                      <Clock className="h-4 w-4 mr-1" />
-                      {featuredArticles[0].readTime}
-                    </span>
-                  </div>
-                  <h3 className="text-3xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">
-                    {featuredArticles[0].title}
-                  </h3>
-                  <p className="text-white/80 text-lg mb-6 line-clamp-2">
-                    {featuredArticles[0].excerpt}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <div className="mr-4">
-                        <p className="text-white font-medium">{featuredArticles[0].author.name}</p>
-                        <p className="text-white/70 text-sm">{featuredArticles[0].author.role}</p>
-                      </div>
-                    </div>
-                    <button className="px-6 py-2 bg-white/90 backdrop-blur-sm text-gray-900 rounded-lg font-medium hover:bg-white transition-colors flex items-center group/btn">
-                      Read More
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </motion.article>
-
-            {/* Secondary Featured Articles */}
-            <div className="lg:col-span-4 grid grid-rows-2 gap-6">
-              {featuredArticles.slice(1, 3).map((article, idx) => (
-                <motion.article
-                  key={article.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 * (idx + 1), duration: 0.5 }}
-                  className="relative group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all min-h-[280px] p-6 flex flex-col border border-gray-100"
-                >
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-2 mb-4">
-                      <span className="px-3 py-1 bg-blue-50 text-blue-600 text-sm font-medium rounded-full">
-                        {article.category}
-                      </span>
-                      <span className="text-gray-500 flex items-center text-sm">
-                        <Clock className="h-4 w-4 mr-1" />
-                        {article.readTime}
-                      </span>
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-                      {article.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {article.excerpt}
-                    </p>
-                  </div>
-                  
-                  <div className="flex items-center justify-between pt-4 mt-auto border-t border-gray-100">
-                    <div>
-                      <p className="font-medium text-gray-900">{article.author.name}</p>
-                      <p className="text-sm text-gray-500">{article.author.role}</p>
-                    </div>
-                    <button className="text-blue-600 hover:text-blue-700 flex items-center text-sm font-medium group-hover:translate-x-1 transition-transform">
-                      Read More
-                      <ArrowRight className="ml-1 h-4 w-4" />
-                    </button>
-                  </div>
-                </motion.article>
-              ))}
-            </div>
-          </div>
-
-          {/* Additional Articles Grid */}
+          <h2 className="text-3xl font-bold text-white mb-12">Latest Insights</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {additionalArticles.map((article, idx) => (
+            {additionalArticles.map((article, index) => (
               <motion.article
                 key={article.id}
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 * idx, duration: 0.5 }}
-                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all group border border-gray-100"
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <span className="px-3 py-1 bg-blue-50 text-blue-600 text-sm font-medium rounded-full">
-                    {article.category}
-                  </span>
-                  <span className="text-gray-500 flex items-center text-sm">
-                    <Clock className="h-4 w-4 mr-1" />
-                    {article.readTime}
-                  </span>
+                <div className="aspect-w-16 aspect-h-9 relative">
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
-                  {article.title}
-                </h3>
-                <p className="text-gray-600 mb-4 line-clamp-2">
-                  {article.excerpt}
-                </p>
-                <div className="flex items-center justify-between pt-4 mt-auto border-t border-gray-100">
-                  <div>
-                    <p className="font-medium text-gray-900">{article.author.name}</p>
-                    <p className="text-sm text-gray-500">{article.author.role}</p>
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="px-3 py-1 bg-gray-700 text-sm font-medium rounded-full text-gray-200">
+                      {article.category}
+                    </span>
+                    <span className="text-sm text-gray-400">{article.date}</span>
                   </div>
-                  <button className="text-blue-600 hover:text-blue-700 flex items-center text-sm font-medium group-hover:translate-x-1 transition-transform">
-                    Read More
-                    <ArrowRight className="ml-1 h-4 w-4" />
-                  </button>
+                  <h3 className="text-lg font-bold text-white mb-2 hover:text-blue-400 transition-colors duration-300">
+                    {article.title}
+                  </h3>
+                  <p className="text-gray-300 text-sm mb-4 line-clamp-2">
+                    {article.excerpt}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <div className="text-sm">
+                        <p className="text-white font-medium">{article.author.name}</p>
+                        <p className="text-gray-400">{article.author.role}</p>
+                      </div>
+                    </div>
+                    <span className="text-sm text-gray-400 flex items-center">
+                      <Clock className="w-4 h-4 mr-1" />
+                      {article.readTime}
+                    </span>
+                  </div>
                 </div>
               </motion.article>
             ))}
           </div>
-
-          {/* View All Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            className="text-center mt-12"
-          >
-            <button className="inline-flex items-center px-8 py-3 bg-gray-900 text-white rounded-lg font-semibold hover:bg-gray-800 transition-colors group">
-              View All Articles
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </motion.div>
         </div>
-      </section>
+      </div>
 
       <Footer />
     </div>
