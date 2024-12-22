@@ -11,6 +11,15 @@
   animation: marquee 30s linear infinite;
 }
 
+.bg-radial-gradient {
+  background: radial-gradient(
+    circle at center,
+    transparent 0%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.07) 100%
+  );
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

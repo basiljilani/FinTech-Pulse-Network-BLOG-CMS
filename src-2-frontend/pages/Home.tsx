@@ -162,28 +162,51 @@ const Home: React.FC = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="relative h-screen">
+      <div className="relative min-h-screen flex flex-col">
         <div className="absolute inset-0">
           <NeuralBackground />
         </div>
         
-        <div className="relative z-10 h-full flex items-center justify-center">
-          <div className="container mx-auto px-6 flex items-center justify-center h-full">
+        <div className="relative z-10 flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+          <div className="w-full max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="max-w-4xl w-full text-center flex flex-col items-center"
+              className="text-center"
             >
-              <h1 className="text-6xl md:text-7xl font-extrabold text-gray-900 mb-8 leading-tight tracking-tight">
+              <motion.h1 
+                className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 mb-6 sm:mb-8 leading-tight tracking-tight"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
                 Elevate Your{" "}
-                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">
+                <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-transparent bg-clip-text">
                   Financial Intelligence
                 </span>
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-600 mb-12">
+              </motion.h1>
+              <motion.p 
+                className="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-8 sm:mb-12 max-w-3xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
                 Harness the power of AI-driven insights, curated knowledge, and strategic analysis to transform your financial decision-making.
-              </p>
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+              >
+                <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">
+                  Get Started
+                </button>
+                <button className="px-8 py-3 bg-white text-gray-900 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 border border-gray-200">
+                  Learn More
+                </button>
+              </motion.div>
             </motion.div>
           </div>
         </div>
