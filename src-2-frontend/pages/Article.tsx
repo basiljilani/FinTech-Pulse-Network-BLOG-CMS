@@ -85,7 +85,7 @@ const Article = () => {
         </div>
 
         {/* Article Title */}
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#3B82F6] via-[#8B5CF6] to-[#EC4899]">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
           {article.title}
         </h1>
 

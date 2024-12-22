@@ -7,7 +7,6 @@ import {
   Cpu,
   Check
 } from 'lucide-react';
-import Footer from '../components/Footer';
 
 const AiCompanion: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -204,8 +203,6 @@ const AiCompanion: React.FC = () => {
       <section className="container mx-auto px-6 py-12 relative z-10">
         {renderTabContent()}
       </section>
-
-      <Footer />
     </div>
   );
 };

@@ -51,7 +51,7 @@ const Insights: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="max-w-4xl mx-auto text-center"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-[#3B82F6] via-[#8B5CF6] to-[#EC4899]">
+          <h1 className="text-5xl md:text-6xl font-bold mb-8 text-white">
             Financial Insights & Analysis
           </h1>
           <p className="text-xl text-gray-300 mb-12">
@@ -120,7 +120,7 @@ const Insights: React.FC = () => {
                   </span>
                 </div>
                 
-                <h3 className="text-xl font-semibold text-white mb-3 line-clamp-2 group-hover:text-[#8B5CF6] transition-colors">
+                <h3 className="text-xl font-semibold text-white mb-3 line-clamp-3 group-hover:text-white transition-colors">
                   {article.title}
                 </h3>
                 

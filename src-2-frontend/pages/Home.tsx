@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import Footer from '../components/Footer';
 import EarthBackground from '../components/EarthBackground';
 import MarketTicker from '../components/MarketTicker';
 import { 
@@ -353,8 +352,6 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };

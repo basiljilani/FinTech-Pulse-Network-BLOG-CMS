@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   User, 
@@ -12,7 +12,6 @@ import {
   BookOpen 
 } from 'lucide-react';
 import { useAuthStore } from '../lib/auth.store';
-import Footer from '../components/Footer';
 
 const dashboardSections = [
   {
@@ -123,7 +122,6 @@ export default function Profile() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
