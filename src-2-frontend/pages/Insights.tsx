@@ -1,207 +1,158 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  TrendingUp, 
-  Globe, 
-  BarChart2, 
-  PieChart, 
-  AreaChart,
-  Lightbulb  
-} from 'lucide-react';
-import Footer from '../components/Footer';
+import { Link } from 'react-router-dom';
+import { Clock, Calendar, Search } from 'lucide-react';
+import { articles, categories } from '../data/articles';
+
+interface Article {
+  id: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  readTime: string;
+  author: {
+    name: string;
+    role: string;
+  };
+}
 
 const Insights: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('all');
-  const [email, setEmail] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const insightCategories = [
-    {
-      icon: TrendingUp,
-      title: 'Market Trends',
-      description: 'Real-time analysis of global financial market movements',
-      filter: 'market'
-    },
-    {
-      icon: Globe,
-      title: 'Global Economics',
-      description: 'Comprehensive insights into international economic landscapes',
-      filter: 'global'
-    },
-    {
-      icon: BarChart2,
-      title: 'Investment Strategies',
-      description: 'Advanced strategies for portfolio optimization and growth',
-      filter: 'investment'
-    }
-  ];
-
-  const insights = [
-    {
-      title: 'AI-Driven Market Prediction Models',
-      category: 'market',
-      date: 'April 15, 2024',
-      excerpt: 'Exploring how machine learning algorithms are revolutionizing market forecasting...',
-      readTime: '6 min read'
-    },
-    {
-      title: 'Emerging Markets: Investment Opportunities',
-      category: 'global',
-      date: 'April 12, 2024',
-      excerpt: 'Deep dive into high-potential emerging markets and their economic dynamics...',
-      readTime: '7 min read'
-    },
-    {
-      title: 'Sustainable Investment Trends 2024',
-      category: 'investment',
-      date: 'April 10, 2024',
-      excerpt: 'Analyzing the rise of ESG investing and its impact on global financial strategies...',
-      readTime: '5 min read'
-    },
-    {
-      title: 'Cryptocurrency Market Volatility Analysis',
-      category: 'market',
-      date: 'April 8, 2024',
-      excerpt: 'Comprehensive analysis of recent cryptocurrency market fluctuations...',
-      readTime: '6 min read'
-    }
-  ];
-
-  const filteredInsights = activeFilter === 'all' 
-    ? insights 
-    : insights.filter(insight => insight.category === activeFilter);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Implement actual subscription logic
-    alert(`Subscribed with email: ${email}`);
-    setEmail('');
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    setCurrentPage(1);
   };
 
+  const handleFilterChange = (filter: string) => {
+    setActiveFilter(filter);
+    setCurrentPage(1);
+  };
+
+  const filteredArticles = articles.filter(article => {
+    const matchesFilter = activeFilter === 'all' || article.category === activeFilter;
+    const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         article.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesFilter && matchesSearch;
+  });
+
+  const featuredArticle = articles[0];
+
   return (
-    <div className="min-h-screen bg-white relative">
-      <motion.div 
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="container mx-auto px-6 pt-36 pb-12"
-      >
-        <div className="flex items-center justify-center mb-8">
-          <Lightbulb className="h-12 w-12 text-yellow-500 mr-4" />
-          <h1 className="text-4xl font-bold text-gray-900">
-            FinTech Pulse Insights
+    <div className="min-h-screen bg-[#0A0F1E] text-gray-100">      
+      {/* Hero Section */}
+      <div className="container mx-auto px-4 pt-32 pb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto text-center"
+        >
+          <h1 className="text-5xl md:text-6xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-[#3B82F6] via-[#8B5CF6] to-[#EC4899]">
+            Financial Insights & Analysis
           </h1>
-        </div>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto text-center">
-          Cutting-edge financial intelligence powered by advanced AI analytics and expert research.
-        </p>
-      </motion.div>
+          <p className="text-xl text-gray-300 mb-12">
+            Expert analysis, market trends, and strategic insights to inform your financial decisions
+          </p>
+          
+          {/* Search Bar */}
+          <div className="relative max-w-2xl mx-auto mb-16">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search insights..."
+              value={searchQuery}
+              onChange={(e) => handleSearch(e.target.value)}
+              className="w-full pl-12 pr-4 py-3 bg-[#1E293B] rounded-xl border border-gray-700 focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6] transition-colors text-white placeholder-gray-400"
+            />
+          </div>
+        </motion.div>
 
-      {/* Insight Categories */}
-      <section className="container mx-auto px-6 py-12">
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
-          {insightCategories.map((category, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.5 }}
-              className="bg-white border border-gray-200 rounded-xl p-8 text-center hover:shadow-xl transition-all"
-            >
-              <div className="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                <category.icon className="h-8 w-8 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">{category.title}</h3>
-              <p className="text-gray-600">{category.description}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Filters */}
-        <div className="flex justify-center space-x-4 mb-12">
-          {['all', 'market', 'global', 'investment'].map((filter) => (
-            <motion.button
-              key={filter}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveFilter(filter)}
-              className={`px-6 py-2 rounded-lg capitalize font-semibold transition-all ${
-                activeFilter === filter 
-                  ? 'bg-blue-600 text-white' 
-                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+        {/* Category Filters */}
+        <div className="flex flex-wrap gap-4 mb-16">
+          <button
+            onClick={() => handleFilterChange('all')}
+            className={`px-6 py-3 rounded-2xl transition-all duration-300 ${
+              activeFilter === 'all'
+                ? 'bg-[#8B5CF6] text-white'
+                : 'bg-[#1E293B] text-gray-400 hover:bg-[#1E293B]/70'
+            }`}
+          >
+            All
+          </button>
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => handleFilterChange(category.id)}
+              className={`flex items-center gap-2 px-6 py-3 rounded-2xl transition-all duration-300 ${
+                activeFilter === category.id
+                  ? 'bg-[#8B5CF6] text-white'
+                  : 'bg-[#1E293B] text-gray-400 hover:bg-[#1E293B]/70'
               }`}
             >
-              {filter}
-            </motion.button>
+              {React.createElement(category.icon, { className: 'h-5 w-5' })}
+              {category.name}
+            </button>
           ))}
         </div>
 
-        {/* Insights Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {filteredInsights.map((insight, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.5 }}
-              className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all"
+        {/* Articles Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredArticles.map((article, index) => (
+            <motion.article
+              key={article.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="group bg-[#1E293B] rounded-2xl overflow-hidden hover:transform hover:scale-[1.02] transition-all duration-300"
             >
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-sm text-blue-600 uppercase font-semibold">
-                    {insight.category}
+              <Link to={`/insights/${article.id}`} className="block p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="px-3 py-1 text-sm rounded-full bg-[#8B5CF6]/20 text-[#8B5CF6]">
+                    {categories.find(c => c.id === article.category)?.name}
                   </span>
-                  <span className="text-sm text-gray-500">{insight.date}</span>
+                  <span className="flex items-center text-sm text-gray-400">
+                    <Clock className="w-4 h-4 mr-1" />
+                    {article.readTime}
+                  </span>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                  {insight.title}
+                
+                <h3 className="text-xl font-semibold text-white mb-3 line-clamp-2 group-hover:text-[#8B5CF6] transition-colors">
+                  {article.title}
                 </h3>
-                <p className="text-gray-600 mb-4">{insight.excerpt}</p>
-                <div className="flex justify-between items-center">
-                  <button className="text-blue-600 hover:underline">
-                    Read More
-                  </button>
-                  <span className="text-sm text-gray-500">{insight.readTime}</span>
+                
+                <p className="text-gray-400 mb-4 line-clamp-2 text-sm">
+                  {article.excerpt}
+                </p>
+                
+                <div className="flex items-center justify-between pt-4 border-t border-gray-700/50">
+                  <div className="flex items-center gap-2">
+                    <div>
+                      <div className="text-sm font-medium text-white">
+                        {article.author.name}
+                      </div>
+                      <div className="text-xs text-gray-400">
+                        {article.author.role}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-400">
+                    <Calendar className="w-4 h-4 mr-1" />
+                    {new Date(article.date).toLocaleDateString('en-US', {
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric'
+                    })}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </Link>
+            </motion.article>
           ))}
         </div>
-      </section>
-
-      {/* Subscribe Section */}
-      <motion.div 
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        viewport={{ once: true, amount: 0.2 }}
-        className="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8 mt-12 rounded-lg shadow-lg"
-      >
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Stay Ahead with Our Newsletter</h2>
-          <p className="text-xl text-gray-600 mb-8">Get the latest financial insights, AI-powered analysis, and exclusive content delivered straight to your inbox.</p>
-          <div className="max-w-md mx-auto">
-            <div className="flex space-x-4">
-              <input 
-                type="email" 
-                placeholder="Enter your email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="flex-1 px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              />
-              <button 
-                type="button" 
-                onClick={handleSubscribe}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-md hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
-              >
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-
-      <Footer />
+      </div>
     </div>
   );
 };

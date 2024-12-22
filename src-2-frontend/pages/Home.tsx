@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Footer from '../components/Footer';
 import EarthBackground from '../components/EarthBackground';
+import MarketTicker from '../components/MarketTicker';
 import { 
   Zap, 
   BookOpen, 
@@ -232,59 +233,7 @@ const Home: React.FC = () => {
       </div>
 
       {/* Market Ticker */}
-      <div className="w-full bg-gray-800 text-white py-4">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className="overflow-hidden"
-          >
-            <div className="animate-marquee whitespace-nowrap flex items-center">
-              <div className="inline-flex items-center mx-8">
-                <span className="font-medium mr-2">BTC/USD</span>
-                <span className="mr-2">$42,830.50</span>
-                <span className="flex items-center text-green-400">
-                  <TrendingUp className="h-4 w-4 mr-1" />
-                  +2.4%
-                </span>
-              </div>
-              <div className="inline-flex items-center mx-8">
-                <span className="font-medium mr-2">ETH/USD</span>
-                <span className="mr-2">$2,241.30</span>
-                <span className="flex items-center text-green-400">
-                  <TrendingUp className="h-4 w-4 mr-1" />
-                  +1.8%
-                </span>
-              </div>
-              <div className="inline-flex items-center mx-8">
-                <span className="font-medium mr-2">S&P 500</span>
-                <span className="mr-2">$4,719.19</span>
-                <span className="flex items-center text-red-400">
-                  <TrendingDown className="h-4 w-4 mr-1" />
-                  -0.3%
-                </span>
-              </div>
-              <div className="inline-flex items-center mx-8">
-                <span className="font-medium mr-2">NASDAQ</span>
-                <span className="mr-2">$14,813.92</span>
-                <span className="flex items-center text-green-400">
-                  <TrendingUp className="h-4 w-4 mr-1" />
-                  +0.5%
-                </span>
-              </div>
-              <div className="inline-flex items-center mx-8">
-                <span className="font-medium mr-2">Gold</span>
-                <span className="mr-2">$2,034.80</span>
-                <span className="flex items-center text-red-400">
-                  <TrendingDown className="h-4 w-4 mr-1" />
-                  -0.1%
-                </span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
+      <MarketTicker />
 
       {/* Value Propositions */}
       <div className="py-20 bg-gray-900">

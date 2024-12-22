@@ -11,6 +11,7 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import FinancialNews from './pages/FinancialNews';
+import Article from './pages/Article';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/ai-companion" element={<AiCompanion />} />
             <Route path="/insights" element={<Insights />} />
+            <Route path="/insights/:id" element={<Article />} />
             <Route path="/solutions" element={<Solutions />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/contact" element={<Contact />} />
