@@ -10,8 +10,10 @@ import {
   Layers
 } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
   const marketOpportunity = {
     icon: Globe,
     title: "Market Opportunity",
@@ -89,7 +91,10 @@ const Home: React.FC = () => {
                 <button className="px-8 py-3 bg-indigo-600 text-white rounded-lg text-lg font-medium hover:bg-indigo-700 transition-colors">
                   Get Started
                 </button>
-                <button className="px-8 py-3 bg-gray-900 text-white border border-gray-700 rounded-lg text-lg font-medium hover:bg-gray-800 hover:border-indigo-500/30 transition-all">
+                <button 
+                  onClick={() => navigate('/about')}
+                  className="px-8 py-3 bg-gray-900 text-white border border-gray-700 rounded-lg text-lg font-medium hover:bg-gray-800 hover:border-indigo-500/30 transition-all"
+                >
                   Learn More
                 </button>
               </motion.div>

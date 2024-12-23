@@ -13,6 +13,7 @@ import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
 import FinancialNews from './pages/FinancialNews';
+import About from './pages/About';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
             <Route path="/insights" element={<Insights />} />
             <Route path="/insights/:id" element={<Article />} />
             <Route path="/ai-companion" element={<AiCompanion />} />
