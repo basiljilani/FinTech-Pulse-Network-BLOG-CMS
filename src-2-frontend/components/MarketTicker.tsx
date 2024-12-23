@@ -8,179 +8,69 @@ interface MarketData {
   change: number;
 }
 
-const ALPHA_VANTAGE_API_KEY = 'YOUR_API_KEY'; // Replace with your Alpha Vantage API key
-
 const MarketTicker: React.FC = () => {
-  const [marketData, setMarketData] = useState<MarketData[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  // Simulated market data
+  const [marketData] = useState<MarketData[]>([
+    { symbol: 'BTC', price: 43779.00, change: 1.55 },
+    { symbol: 'ETH', price: 2286.27, change: 0.11 },
+    { symbol: 'AAPL', price: 195.89, change: 0.78 },
+    { symbol: 'GOOGL', price: 141.49, change: -0.25 },
+    { symbol: 'MSFT', price: 374.58, change: 1.02 },
+    { symbol: 'AMZN', price: 153.42, change: 0.91 },
+    { symbol: 'S&P 500', price: 4754.63, change: 0.45 },
+    { symbol: 'NASDAQ', price: 14897.24, change: 0.61 }
+  ]);
 
-  const stockSymbols = ['AAPL', 'GOOGL', 'MSFT', 'AMZN'];
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    const fetchCryptoData = async () => {
-      try {
-        const response = await fetch(
-          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true'
-        );
-        const data = await response.json();
-        
-        return [
-          {
-            symbol: 'BTC',
-            price: data.bitcoin.usd,
-            change: data.bitcoin.usd_24h_change
-          },
-          {
-            symbol: 'ETH',
-            price: data.ethereum.usd,
-            change: data.ethereum.usd_24h_change
-          }
-        ];
-      } catch (error) {
-        console.error('Error fetching crypto data:', error);
-        return [];
-      }
-    };
+    const timer = setInterval(() => {
+      setOffset((prev) => (prev + 1) % marketData.length);
+    }, 3000);
 
-    const fetchStockData = async (symbol: string) => {
-      try {
-        // Global Quote endpoint for real-time stock data
-        const response = await fetch(
-          `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${ALPHA_VANTAGE_API_KEY}`
-        );
-        const data = await response.json();
-        
-        if (data['Global Quote']) {
-          const quote = data['Global Quote'];
-          return {
-            symbol,
-            price: parseFloat(quote['05. price']),
-            change: parseFloat(quote['10. change percent'].replace('%', ''))
-          };
-        }
-        throw new Error('Invalid response format');
-      } catch (error) {
-        console.error(`Error fetching stock data for ${symbol}:`, error);
-        return null;
-      }
-    };
-
-    const fetchIndexData = async (symbol: string) => {
-      try {
-        const response = await fetch(
-          `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${ALPHA_VANTAGE_API_KEY}`
-        );
-        const data = await response.json();
-        
-        if (data['Global Quote']) {
-          const quote = data['Global Quote'];
-          return {
-            symbol: symbol === 'SPY' ? 'S&P 500' : 'NASDAQ',
-            price: parseFloat(quote['05. price']),
-            change: parseFloat(quote['10. change percent'].replace('%', ''))
-          };
-        }
-        throw new Error('Invalid response format');
-      } catch (error) {
-        console.error(`Error fetching index data for ${symbol}:`, error);
-        return null;
-      }
-    };
-
-    const updateData = async () => {
-      try {
-        const cryptoData = await fetchCryptoData();
-        
-        // Fetch stock data
-        const stockPromises = stockSymbols.map(symbol => fetchStockData(symbol));
-        const stockData = await Promise.all(stockPromises);
-        const validStockData = stockData.filter((data): data is MarketData => data !== null);
-
-        // Fetch index data (SPY for S&P 500 and QQQ for NASDAQ)
-        const indexPromises = ['SPY', 'QQQ'].map(symbol => fetchIndexData(symbol));
-        const indexData = await Promise.all(indexPromises);
-        const validIndexData = indexData.filter((data): data is MarketData => data !== null);
-
-        // Combine all data
-        const allData = [...cryptoData, ...validStockData, ...validIndexData];
-        
-        if (allData.length > 0) {
-          setMarketData(allData);
-          setError(null);
-        } else {
-          setError('Unable to fetch market data');
-        }
-        setLoading(false);
-      } catch (err) {
-        console.error('Error updating market data:', err);
-        setError('Failed to fetch market data');
-        setLoading(false);
-      }
-    };
-
-    updateData();
-    const interval = setInterval(updateData, 60000); // Update every minute due to API rate limits
-
-    return () => clearInterval(interval);
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="w-full bg-gray-900 py-3 overflow-hidden">
-        <div className="text-center text-gray-400">Loading market data...</div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="w-full bg-gray-900 py-3 overflow-hidden">
-        <div className="text-center text-red-400">{error}</div>
-      </div>
-    );
-  }
+    return () => clearInterval(timer);
+  }, [marketData.length]);
 
   return (
-    <div className="w-full bg-gray-900 py-3 overflow-hidden">
-      <motion.div
-        animate={{ 
-          x: [0, -1000],
-        }}
-        transition={{
-          x: {
-            repeat: Infinity,
-            repeatType: "loop",
-            duration: 20,
-            ease: "linear",
-          },
-        }}
-        className="flex space-x-8 whitespace-nowrap"
-      >
-        {[...marketData, ...marketData].map((item, index) => (
-          <div key={index} className="inline-flex items-center space-x-2">
-            <span className="text-white font-semibold">{item.symbol}</span>
-            <span className="text-gray-300">
-              ${item.price.toLocaleString(undefined, { 
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2 
-              })}
-            </span>
-            <span
-              className={`flex items-center ${
-                item.change >= 0 ? 'text-green-500' : 'text-red-500'
-              }`}
+    <div className="w-full overflow-hidden py-3 bg-gray-900/80 backdrop-blur-sm">
+      <div className="relative flex items-center">
+        <motion.div
+          className="flex space-x-8 whitespace-nowrap px-4"
+          animate={{
+            x: `-${offset * 200}px`
+          }}
+          transition={{
+            duration: 1,
+            ease: "easeInOut"
+          }}
+        >
+          {marketData.map((item, index) => (
+            <div
+              key={`${item.symbol}-${index}`}
+              className="inline-flex items-center space-x-2"
             >
-              {item.change >= 0 ? (
-                <TrendingUp className="w-4 h-4 mr-1" />
-              ) : (
-                <TrendingDown className="w-4 h-4 mr-1" />
-              )}
-              {Math.abs(item.change).toFixed(2)}%
-            </span>
-          </div>
-        ))}
-      </motion.div>
+              <span className="text-gray-300 font-medium">{item.symbol}</span>
+              <span className="text-white font-semibold">
+                ${item.price.toLocaleString()}
+              </span>
+              <div
+                className={`flex items-center ${
+                  item.change >= 0 ? 'text-green-400' : 'text-red-400'
+                }`}
+              >
+                {item.change >= 0 ? (
+                  <TrendingUp className="h-4 w-4 mr-1" />
+                ) : (
+                  <TrendingDown className="h-4 w-4 mr-1" />
+                )}
+                <span className="font-medium">
+                  {Math.abs(item.change).toFixed(2)}%
+                </span>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
     </div>
   );
 };
