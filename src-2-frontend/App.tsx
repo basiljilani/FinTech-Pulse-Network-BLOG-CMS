@@ -5,7 +5,6 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Insights from './pages/Insights';
 import Article from './pages/Article';
-import Solutions from './pages/Solutions';
 import AiCompanion from './pages/AiCompanion';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
@@ -25,7 +24,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/insights" element={<Insights />} />
             <Route path="/insights/:id" element={<Article />} />
-            <Route path="/solutions" element={<Solutions />} />
             <Route path="/ai-companion" element={<AiCompanion />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<Settings />} />

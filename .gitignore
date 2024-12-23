@@ -1,12 +1,13 @@
 # Dependency directories
-node_modules/
+node_modules
+.pnp
+.pnp.js
 jspm_packages/
 
 # Build output
 dist/
 build/
 out/
-*.log
 
 # Environment files
 .env
@@ -14,6 +15,7 @@ out/
 .env.development.local
 .env.test.local
 .env.production.local
+*.pem
 
 # Logs
 npm-debug.log*
@@ -28,11 +30,14 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+*.swp
+*.swo
 
 # macOS system files
 .DS_Store
 .AppleDouble
 .LSOverride
+Thumbs.db
 
 # Temporary files
 *.tmp
@@ -49,3 +54,22 @@ yarn-error.log*
 # Backup files
 *.bak
 *~
+
+# Typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# WordPress
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-admin/install.php
+wp-admin/install-helper.php
+wp-content/debug.log
+wp-content/object-cache.php
+
+# React
+public/build/
+public/static/
+public/manifest.json
+public/service-worker.js

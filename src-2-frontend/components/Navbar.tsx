@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Activity, UserCircle, Settings, Users, Lightbulb, Cpu, Target } from 'lucide-react';
+import { Menu, X, Activity, UserCircle, Settings, Users, Lightbulb, Cpu } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -57,10 +57,6 @@ const Navbar: React.FC = () => {
               <Lightbulb className="h-4 w-4 mr-1" />
               Insights
             </Link>
-            <Link to="/solutions" className="text-white hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium flex items-center">
-              <Target className="h-4 w-4 mr-1" />
-              Solutions
-            </Link>
             <Link to="/community" className="text-white hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium flex items-center">
               <Users className="h-4 w-4 mr-1" />
               Community
@@ -108,7 +104,6 @@ const Navbar: React.FC = () => {
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <Link to="/ai-companion" className="text-white hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">Pulse AI</Link>
             <Link to="/insights" className="text-white hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">Insights</Link>
-            <Link to="/solutions" className="text-white hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">Solutions</Link>
             <Link to="/community" className="text-white hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">Community</Link>
             <Link to="/profile" className="text-white hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">Profile</Link>
             <Link to="/settings" className="text-white hover:text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">Settings</Link>

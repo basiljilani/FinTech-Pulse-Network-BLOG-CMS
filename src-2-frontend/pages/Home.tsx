@@ -17,8 +17,33 @@ import {
   TrendingDown,
   DollarSign,
   BarChart2,
-  Activity
+  Activity,
+  Cpu,
+  Layers
 } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
+
+interface SolutionCardProps {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  color: string;
+}
+
+const SolutionCard: React.FC<SolutionCardProps> = ({ icon: Icon, title, description, color }) => (
+  <motion.div 
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-xl transition-all group"
+  >
+    <div className={`bg-${color}-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6`}>
+      <Icon className={`h-8 w-8 text-${color}-600`} />
+    </div>
+    <h3 className="text-xl font-semibold text-gray-900 mb-3 text-center">{title}</h3>
+    <p className="text-gray-600 text-center">{description}</p>
+  </motion.div>
+);
 
 const Home: React.FC = () => {
   const valuePropositions = [
@@ -158,6 +183,61 @@ const Home: React.FC = () => {
       }
     }
   ];
+
+  const solutions = [
+    {
+      icon: Cpu,
+      title: "AI-Curated Articles",
+      description: "Hyper-relevant industry news tailored to individual user profiles.",
+      color: "blue"
+    },
+    {
+      icon: Users,
+      title: "Real-Time AI Engagement",
+      description: "Interactive discussions with an AI agent that understands your expertise.",
+      color: "green"
+    },
+    {
+      icon: TrendingUp,
+      title: "Token-Based Interaction",
+      description: "Meaningful AI engagement with scalable monetization through tiered tokens.",
+      color: "purple"
+    }
+  ];
+
+  const marketOpportunity = {
+    icon: Globe,
+    title: "Market Opportunity",
+    description: "Bridging fintech and education markets worth over $1 trillion by 2030.",
+    details: [
+      "Fintech market: $698 billion by 2030",
+      "EdTech market: $400 billion by 2028",
+      "Unique positioning at market intersection"
+    ]
+  };
+
+  const scalabilityRoadmap = {
+    icon: Layers,
+    title: "Scalability Roadmap",
+    description: "Strategic expansion across fintech verticals and global markets.",
+    details: [
+      "Phase 1: User Growth and Community Building",
+      "Phase 2: AI Capability Expansion",
+      "Phase 3: Market Domination and Vertical Expansion"
+    ]
+  };
+
+  const revenueModel = {
+    icon: BookOpen,
+    title: "Revenue Model",
+    description: "Flexible monetization through subscriptions, tokens, and enterprise solutions.",
+    details: [
+      "Basic Tier: $10/month",
+      "Pro Tier: $25/month",
+      "Enterprise: Custom Pricing",
+      "Additional Token Purchases Available"
+    ]
+  };
 
   return (
     <div className="min-h-screen bg-black">
@@ -300,6 +380,47 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Solutions Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Solutions</h2>
+            <p className="text-xl text-gray-600">Innovative features powered by cutting-edge technology</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            {solutions.map((solution, index) => (
+              <SolutionCard key={index} {...solution} />
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+            {[marketOpportunity, scalabilityRoadmap, revenueModel].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                className="bg-white rounded-xl p-8 shadow-lg"
+              >
+                <div className="flex items-center mb-6">
+                  <item.icon className="h-8 w-8 text-blue-600 mr-4" />
+                  <h3 className="text-xl font-semibold text-gray-900">{item.title}</h3>
+                </div>
+                <p className="text-gray-600 mb-4">{item.description}</p>
+                <ul className="space-y-2">
+                  {item.details.map((detail, idx) => (
+                    <li key={idx} className="flex items-center text-gray-600">
+                      <Check className="h-5 w-5 text-green-500 mr-2" />
+                      <span>{detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Additional Articles */}
       <div className="py-20 bg-gray-900">
