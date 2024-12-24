@@ -8,7 +8,7 @@ import {
   Globe,
   Shield,
   Zap,
-  ChartBar,
+  BarChart,
   Building2,
   Newspaper,
   GraduationCap,

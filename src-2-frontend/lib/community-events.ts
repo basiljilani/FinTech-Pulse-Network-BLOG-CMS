@@ -58,10 +58,7 @@ export const announceEvent = async (event: CommunityEvent) => {
       description: event.description,
       color: 0x5865F2, // Discord blue
       fields,
-      timestamp: new Date().toISOString(),
-      footer: {
-        text: 'FinTech Pulse Network Community'
-      }
+      timestamp: new Date().toISOString()
     }]
   });
 };
