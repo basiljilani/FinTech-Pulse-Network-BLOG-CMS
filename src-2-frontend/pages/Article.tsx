@@ -47,7 +47,7 @@ const Article = () => {
       className="min-h-screen bg-[#0A0F1E] text-white"
     >
       {/* Header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32">
         <div className="flex items-center gap-4 mb-8">
           <button 
             onClick={() => navigate('/insights')}
