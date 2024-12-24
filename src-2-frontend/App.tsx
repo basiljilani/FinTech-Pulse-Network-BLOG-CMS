@@ -14,6 +14,7 @@ import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
 import FinancialNews from './pages/FinancialNews';
 import About from './pages/About';
+import FinTechHub from './pages/FinTechHub';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/insights" element={<Insights />} />
+            <Route path="/fintech-hub" element={<FinTechHub />} />
             <Route path="/insights/:id" element={<Article />} />
             <Route path="/ai-companion" element={<AiCompanion />} />
             <Route path="/profile" element={<Profile />} />

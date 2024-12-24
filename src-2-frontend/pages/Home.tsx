@@ -88,7 +88,10 @@ const Home: React.FC = () => {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="mt-12 flex flex-col sm:flex-row items-center gap-6 justify-center"
               >
-                <button className="px-8 py-3 bg-indigo-600 text-white rounded-lg text-lg font-medium hover:bg-indigo-700 transition-colors">
+                <button
+                  onClick={() => navigate('/fintech-hub')}
+                  className="px-8 py-3 bg-indigo-600 text-white rounded-lg text-lg font-medium hover:bg-indigo-700 transition-colors"
+                >
                   Get Started
                 </button>
                 <button 
