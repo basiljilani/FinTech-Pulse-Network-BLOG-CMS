@@ -5,7 +5,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -13,18 +13,18 @@
     "jsx": "react-jsx",
     "strict": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["src-2-frontend/*"], // Corrected path
-      "@lib/*": ["src-2-frontend/lib/*"]
+      "@/*": ["src/*"],
+      "@lib/*": ["src/lib/*"]
     },
     "allowJs": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["./node_modules/@types", "./src-2-frontend/types"]
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
-  "include": ["src-2-frontend"],
+  "include": ["src"],
   "references": [
     { "path": "./tsconfig.node.json" }
   ]

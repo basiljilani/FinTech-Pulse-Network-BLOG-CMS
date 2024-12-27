@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Insights from './pages/Insights';
 import Article from './pages/Article';
+import ArticleView from './pages/ArticleView';
 import AiCompanion from './pages/AiCompanion';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
@@ -15,6 +16,7 @@ import Dashboard from './pages/Dashboard';
 import FinancialNews from './pages/FinancialNews';
 import About from './pages/About';
 import FinTechHub from './pages/FinTechHub';
+import ArticleManager from './pages/ArticleManager';
 
 function App() {
   return (
@@ -27,7 +29,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/insights" element={<Insights />} />
             <Route path="/fintech-hub" element={<FinTechHub />} />
-            <Route path="/insights/:id" element={<Article />} />
+            <Route path="/insights/:id" element={<ArticleView />} />
             <Route path="/ai-companion" element={<AiCompanion />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<Settings />} />
@@ -36,6 +38,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/financial-news" element={<FinancialNews />} />
+            <Route path="/admin/articles" element={<ArticleManager />} />
           </Routes>
         </main>
         <Footer />
