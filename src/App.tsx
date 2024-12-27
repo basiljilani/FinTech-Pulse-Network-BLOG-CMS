@@ -17,11 +17,13 @@ import FinancialNews from './pages/FinancialNews';
 import About from './pages/About';
 import FinTechHub from './pages/FinTechHub';
 import ArticleManager from './pages/ArticleManager';
+import CreateArticle from './pages/CreateArticle';
+import EditArticle from './pages/EditArticle';
 
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen bg-[#0B0F17]">
         <Navbar />
         <main className="flex-grow">
           <Routes>
@@ -39,6 +41,8 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/financial-news" element={<FinancialNews />} />
             <Route path="/admin/articles" element={<ArticleManager />} />
+            <Route path="/admin/create-article" element={<CreateArticle />} />
+            <Route path="/admin/edit-article/:id" element={<EditArticle />} />
           </Routes>
         </main>
         <Footer />

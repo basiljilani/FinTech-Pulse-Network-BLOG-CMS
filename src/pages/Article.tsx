@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, ArrowLeft, Share2 } from 'lucide-react';
+import { Calendar, Clock, ArrowLeft, Share2, Lightbulb, CheckCircle2, Target } from 'lucide-react';
 import { articles, categories } from '../data/articles';
 
 const Article = () => {
@@ -66,16 +66,16 @@ const Article = () => {
         </div>
 
         {/* Article Meta */}
-        <div className="flex items-center gap-4 mb-6">
-          <span className="px-3 py-1 text-sm rounded-full bg-[#8B5CF6]/20 text-[#8B5CF6]">
+        <div className="flex flex-wrap items-center gap-4 mb-6">
+          <span className="px-3 py-1 text-sm rounded-full bg-[#8B5CF6]/20 text-[#8B5CF6] truncate max-w-[200px]">
             {category?.name}
           </span>
-          <span className="flex items-center text-sm text-gray-400">
-            <Clock className="w-4 h-4 mr-1" />
+          <span className="flex items-center text-sm text-gray-400 whitespace-nowrap">
+            <Clock className="w-4 h-4 mr-1 flex-shrink-0" />
             {article.readTime}
           </span>
-          <span className="flex items-center text-sm text-gray-400">
-            <Calendar className="w-4 h-4 mr-1" />
+          <span className="flex items-center text-sm text-gray-400 whitespace-nowrap">
+            <Calendar className="w-4 h-4 mr-1 flex-shrink-0" />
             {new Date(article.date).toLocaleDateString('en-US', {
               month: 'long',
               day: 'numeric',
@@ -85,15 +85,15 @@ const Article = () => {
         </div>
 
         {/* Article Title */}
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white break-words">
           {article.title}
         </h1>
 
         {/* Author Info */}
         <div className="flex items-center gap-4 mb-12 pb-12 border-b border-gray-800">
-          <div>
-            <div className="font-medium text-lg">{article.author.name}</div>
-            <div className="text-gray-400">{article.author.role}</div>
+          <div className="min-w-0">
+            <div className="font-medium text-lg truncate">{article.author.name}</div>
+            <div className="text-gray-400 truncate">{article.author.role}</div>
           </div>
         </div>
       </div>
@@ -101,14 +101,14 @@ const Article = () => {
       {/* Article Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         {/* Introduction */}
-        <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+        <p className="text-xl text-gray-300 mb-12 leading-relaxed break-words">
           {article.excerpt}
         </p>
 
         {/* Mock Content Sections */}
         <div className="prose prose-invert max-w-none">
-          <h2 className="text-2xl font-bold mb-6">Understanding the Impact</h2>
-          <p className="mb-8 text-gray-300 leading-relaxed">
+          <h2 className="text-2xl font-bold mb-6 break-words">Understanding the Impact</h2>
+          <p className="mb-8 text-gray-300 leading-relaxed break-words">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </p>
@@ -129,29 +129,41 @@ const Article = () => {
             </p>
           </div>
 
-          <h3 className="text-xl font-bold mb-4">Implementation Strategy</h3>
-          <p className="mb-8 text-gray-300 leading-relaxed">
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
+          <div className="bg-[#1A1F2E] rounded-lg p-6 mb-8">
+            <div className="flex items-center space-x-2 mb-4">
+              <Target className="w-6 h-6 text-blue-500" />
+              <h2 className="text-xl font-semibold">Implementation Strategy</h2>
+            </div>
+            <div className="text-gray-300">
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </div>
+          </div>
 
-          <div className="bg-gradient-to-br from-[#2563EB]/20 via-[#4F46E5]/20 to-[#7C3AED]/20 rounded-2xl p-8 mb-8">
-            <h4 className="text-lg font-bold mb-4">🎯 Key Takeaways</h4>
-            <ul className="list-none space-y-4">
-              <li className="flex items-start gap-2">
-                <span className="text-[#8B5CF6]">1.</span>
-                <span className="text-gray-300">Focus on regulatory compliance from the start</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-[#8B5CF6]">2.</span>
-                <span className="text-gray-300">Invest in proper training and documentation</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-[#8B5CF6]">3.</span>
-                <span className="text-gray-300">Regular audits and updates are crucial</span>
-              </li>
+          <div className="bg-[#1A1F2E] rounded-lg p-6 mb-8">
+            <div className="flex items-center space-x-2 mb-4">
+              <CheckCircle2 className="w-6 h-6 text-emerald-500" />
+              <h2 className="text-xl font-semibold">Key Takeaways</h2>
+            </div>
+            <ul className="list-disc list-inside space-y-2 text-gray-300">
+              <li>Focus on regulatory compliance from the start</li>
+              <li>Invest in proper training and documentation</li>
+              <li>Regular audits and updates are crucial</li>
             </ul>
           </div>
+
+          {/* Pro Tips Section */}
+          {article.proTip && (
+            <div className="bg-[#1A1F2E] rounded-lg p-6 mb-8">
+              <div className="flex items-center space-x-2 mb-4">
+                <Lightbulb className="w-6 h-6 text-yellow-500" />
+                <h2 className="text-xl font-semibold">Pro Tips</h2>
+              </div>
+              <div className="text-gray-300">
+                {article.proTipContent}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Related Articles */}
@@ -165,18 +177,18 @@ const Article = () => {
                 <Link
                   key={relatedArticle.id}
                   to={`/insights/${relatedArticle.id}`}
-                  className="group bg-[#1E293B] rounded-2xl p-6 hover:transform hover:scale-[1.02] transition-all duration-300"
+                  className="group bg-[#1E293B] rounded-2xl p-6 hover:transform hover:scale-[1.02] transition-all duration-300 overflow-hidden"
                 >
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="px-3 py-1 text-sm rounded-full bg-[#8B5CF6]/20 text-[#8B5CF6]">
+                  <div className="flex flex-wrap items-center gap-2 mb-4">
+                    <span className="px-3 py-1 text-sm rounded-full bg-[#8B5CF6]/20 text-[#8B5CF6] truncate max-w-[150px]">
                       {category?.name}
                     </span>
-                    <span className="flex items-center text-sm text-gray-400">
-                      <Clock className="w-4 h-4 mr-1" />
+                    <span className="flex items-center text-sm text-gray-400 whitespace-nowrap">
+                      <Clock className="w-4 h-4 mr-1 flex-shrink-0" />
                       {relatedArticle.readTime}
                     </span>
                   </div>
-                  <h4 className="text-lg font-semibold text-white mb-2 group-hover:text-[#8B5CF6] transition-colors">
+                  <h4 className="text-lg font-semibold text-white mb-2 group-hover:text-[#8B5CF6] transition-colors line-clamp-2">
                     {relatedArticle.title}
                   </h4>
                   <p className="text-gray-400 text-sm line-clamp-2">

@@ -130,33 +130,33 @@ const Insights: React.FC = () => {
               <Link
                 key={article._id}
                 to={`/insights/${article._id}`}
-                className="bg-[#1A1F2E] rounded-xl p-6 hover:bg-[#2A2F3E] transition-all group"
+                className="bg-[#1A1F2E] rounded-xl p-6 hover:bg-[#2A2F3E] transition-all group block overflow-hidden"
               >
                 <div className="flex flex-col h-full">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="bg-[#7C3AED]/20 text-[#7C3AED] px-3 py-1 rounded-full text-sm font-medium">
+                    <span className="bg-[#7C3AED]/20 text-[#7C3AED] px-3 py-1 rounded-full text-sm font-medium truncate">
                       {article.category}
                     </span>
-                    <span className="flex items-center text-gray-400 text-sm">
+                    <span className="flex items-center text-gray-400 text-sm whitespace-nowrap">
                       <Clock className="w-4 h-4 mr-1" />
                       {article.readTime} read
                     </span>
                   </div>
                   
-                  <h2 className="text-xl font-semibold text-white mb-3 group-hover:text-[#7C3AED] transition-colors">
+                  <h2 className="text-xl font-semibold text-white mb-3 group-hover:text-[#7C3AED] transition-colors line-clamp-2">
                     {article.title}
                   </h2>
                   
-                  <p className="text-gray-400 text-sm mb-6 flex-grow">
+                  <p className="text-gray-400 text-sm mb-6 flex-grow line-clamp-3">
                     {article.excerpt}
                   </p>
                   
                   <div className="flex items-center justify-between mt-auto">
-                    <div>
-                      <p className="text-white text-sm font-medium">{article.author?.name}</p>
-                      <p className="text-gray-400 text-xs">{article.author?.role}</p>
+                    <div className="min-w-0">
+                      <p className="text-white text-sm font-medium truncate">{article.author?.name}</p>
+                      <p className="text-gray-400 text-xs truncate">{article.author?.role}</p>
                     </div>
-                    <span className="text-gray-400 text-sm">
+                    <span className="text-gray-400 text-sm whitespace-nowrap ml-4">
                       {new Date(article.date).toLocaleDateString('en-US', {
                         month: 'long',
                         day: 'numeric',
