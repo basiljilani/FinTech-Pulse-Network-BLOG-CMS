@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import articlesRouter from './routes/articles.js';
+import usersRouter from './routes/users.js';
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ const connectDB = async () => {
 connectDB().then(() => {
   // Routes
   app.use('/api/articles', articlesRouter);
+  app.use('/api/users', usersRouter);
 
   // Basic route for testing
   app.get('/', (req, res) => {

@@ -19,6 +19,9 @@ import FinTechHub from './pages/FinTechHub';
 import ArticleManager from './pages/ArticleManager';
 import CreateArticle from './pages/CreateArticle';
 import EditArticle from './pages/EditArticle';
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
+import UserManager from './pages/UserManager';
 
 function App() {
   return (
@@ -40,6 +43,9 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/financial-news" element={<FinancialNews />} />
+            <Route path="/admin" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/users" element={<UserManager />} />
             <Route path="/admin/articles" element={<ArticleManager />} />
             <Route path="/admin/create-article" element={<CreateArticle />} />
             <Route path="/admin/edit-article/:id" element={<EditArticle />} />
